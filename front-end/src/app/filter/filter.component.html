@@ -1,0 +1,65 @@
+<h3> Filtro </h3>
+<form   (ngSubmit)="seach()">    
+    <div class="form-group row" >
+        <label  class="col-sm-2 col-form-label" for="idComp" >Compañia</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="number" min="0"  [formControl]="idCompForm"  />
+        </div>        
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="idUser"> Usuario</label>
+        <div class="col-sm-10">
+            <select class="form-control custom-select" [formControl]= "idUserForm" >
+                <option value="-1" >Todos</option>
+                <option  *ngFor="let usr of usuarios"  >{{usr}}</option>
+            </select>     
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"  for="fIn"  >Fecha Inicio</label> 
+            <div class="col-sm-10">
+                <input class="form-control" type="date" [formControl]="fAntForm" />
+            </div>            
+        </div>
+        <div class="form-group row">
+            <label  class="col-sm-2 col-form-label" for="fFin" >Fecha Final</label>
+            <div class="col-sm-10">
+                <input class="form-control" type="date" [formControl]="fActForm" />
+            </div>
+        </div>
+    </div>   
+    <div class="form-group row">
+        <label  class="col-sm-2 col-form-label"  for="inter" >Intervalo</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="number" min="0" [formControl]="interForm"/>
+        </div>        
+    </div>
+    <div class="form-group">
+        <button class="btn btn-outline-primary" type="submit" (ngSubmit)="seach()"  >Mostrar</button>
+    </div>
+    
+    
+    
+</form>
+
+<div *ngIf="mostrarLoading" >
+    <div class="spinner-border" role="status">
+        <span class="sr-only"></span>
+      </div>
+</div>
+
+<div *ngIf="mostrarGrafico" style="display: block;" >
+    <h3> Grafico Eventos vs Tiempo </h3>
+
+    <canvas baseChart width="300" height="150" 
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [options]="lineChartOptions"
+    [colors]="lineChartColors"
+    [chartType]="lineChartType"
+    [plugins]="lineChartPlugins"
+    >
+</canvas>
+
+</div>
